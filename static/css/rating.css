@@ -8,7 +8,7 @@
 
 .star-rating .current-rating{
 
-	background: url(star.gif) left -1000px repeat-x;
+	background: #000000 url(star.gif) left -1000px repeat-x;
 
 }
 
