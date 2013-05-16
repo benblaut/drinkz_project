@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block head %}
+  
+  <script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+         $('.drink_rating').each(function(index){
+          $(this).raty({
+            readOnly:  false,
+            path: "/static/images/",
+            start: $(this).children("span:first").text(),
+            click: function(score, evt) {
+                var vote_url = "rate/" + this.attr('id').substring(2) + "/" + score + "/";
+                $.ajax({
+                  url: vote_url,
+                  success: function(){
+                    //alert('vote successful');
+                  }
+                });
+            }
+          });
+        });
+    });
+  </script>
+  <script language="javascript">
+    function sort_by_name() {
+      recipes_list = recipes_by_name;
+    }
+  </script>
+{% endblock %}
+
+{% block main %}
+  <h1>Recipe Collection</h1>
+  {% if recipes_list %}
+  <label for="sort">Sort:</label>
+  <select id="sort">
+    <option value="default" selected></option>
+    <option value="by_name" onclick="sort_by_name()">by name</option>
+    <option value="by_rating" onclick="sort_by_rating()">by rating</option>
+  </select>
+  <table>
+  {% for r in recipes_list %}
+  <tr>
+    <td>
+        <section class="ac-container">
+        <div>
+          <input id="ac-1" name="accordion-1" type="checkbox" />
+          <label for="ac-1">{{r.name}}</label>
+          <article class="ac-small">
+          <ul>
+          {% for i in r.ingredient_list%}
+            <li>{{i.part}}, {{i.amount}}</li>
+          {% endfor %}
+          </ul>
+          </article>
+        </div>
+        </section>
+    </dl></td>
+    <td><div class="drink_rating" id="t_{{ r.id }}"><span style="display:none;">{{ r.rating.score }}</span></div></td>
+  </tr>
+  {% endfor %}
+  </table>
+  {% else %}
+  <p>There doesn't seem to be any recipes.</p>
+  {% endif %}
+{% endblock %}
+
+{% block sidebar %}
+  <div class="block">
+    <div class="sidebar-block">
+      <h4>Recipe List</h4>
+      <p>Recipes with ratings.</p>
+    </div>
+  </div>
+{% endblock %}
+
+<h1>Add a recipe:</h1>
+<form action="recipes_add">
+Recipe name: <input type="text" name="name"><p>
+Ingredients: (type, amount) on each line --
+<br>
+<textarea name="ingredients" cols=40 rows=3></textarea>
+<input type="submit">
+</form>

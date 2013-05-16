@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Drinkz</title>
+  {% load staticfiles %}
+  <link type="text/css" rel="stylesheet" href="{% static 'css/base.css' %}" />
+  <link type="text/css" rel="stylesheet" href="{% static 'css/themes/default/style.css' %}" />
+  <link type="text/css" rel="stylesheet" href="{% static 'css/foldout.css' %}" />
+  <script type="text/javascript" charset="utf-8" src="{% static 'scripts/js/jquery-1.6.2.min.js' %}"></script>
+  <script type="text/javascript" charset="utf-8" src="{% static 'scripts/js/jquery.raty.js' %}"></script>
+  <script type="text/javascript" charset="utf-8" src="{% static 'scripts/js/jquery.tablesorter.js' %}"></script> 
+  {% block head %}
+  {% endblock %}
+</head>
+<body>
+  <div id="container">
+    <div id="header">
+      <h1><a href="/">Drinkz</a></h1><h2> a site to keep track of your drinks.</h2>
+      <div id="main-navigation">
+        <ul class="wat-cf">
+          <li><a href="/admin">Admin</a></li>
+          <li><a href="/recipes">Recipes</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="wrapper" class="wat-cf">
+      <div id="main">
+
+        {% block main %}
+
+        {% endblock %}
+
+        <div id="footer">
+          <div class="block">
+            <p>Copyright &copy; 2013 <a href="http://winventions.info">Ben Blaut</a>.</p>
+          </div>
+        </div>
+      </div>
+      <div id="sidebar">
+        {% block sidebar %}
+        {% endblock %}
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
