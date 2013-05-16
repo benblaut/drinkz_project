@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from djangoratings.views import AddRatingFromModel
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -18,10 +19,10 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     url(r'^recipes/$', 'recipes.views.index'),
+
+    url(r'rate/(?P<object_id>\d+)/(?P<score>\d+)/', AddRatingFromModel(), {
+        'app_label': 'recipes',
+        'model': 'recipes',
+        'field_name': 'rating',
+    }),
 )
-
-if settings.DEBUG:
-    urlpatterns += patterns('',
-        (r'^mymedia/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
-    )
-

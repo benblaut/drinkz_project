@@ -1,4 +1,5 @@
 from django.db import models
+from djangoratings.fields import RatingField
 
 class Ingredient(models.Model):
     part = models.CharField(max_length=100)
@@ -10,6 +11,7 @@ class Ingredient(models.Model):
 class Recipes(models.Model):
     name = models.CharField(max_length=100)
     ingredients = models.ManyToManyField(Ingredient)
+    rating = RatingField(range=5, can_change_vote=True)
 
     @property
     def ingredient_list(self):

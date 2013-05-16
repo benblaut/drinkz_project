@@ -7,3 +7,4 @@ def index(request):
     t = loader.get_template('recipes/index.html')
     c = Context({'recipes_list': recipes_list,})
     return HttpResponse(t.render(c))
+    
