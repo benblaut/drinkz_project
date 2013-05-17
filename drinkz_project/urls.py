@@ -18,7 +18,9 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 
-    url(r'^recipes/$', 'recipes.views.index'),
+    url(r'^recipes/$', 'recipes.views.recipes'),
+
+    url(r'^recipes/add_recipe/$', 'recipes.views.add_recipe'),
 
     url(r'rate/(?P<object_id>\d+)/(?P<score>\d+)/', AddRatingFromModel(), {
         'app_label': 'recipes',
