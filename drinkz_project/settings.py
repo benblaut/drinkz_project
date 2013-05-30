@@ -116,19 +116,29 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
+    'recipes',
+    'djangoratings',
+    'registration',
+    # Uncomment the next line to enable the admin:
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.humanize',
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'recipes',
-    'djangoratings',
-    # Uncomment the next line to enable the admin:
-    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
+
+ACCOUNT_ACTIVATION_DAYS = 7 # One week activation window for activating new accounts
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
+EMAIL_HOST_USER = ""
+EMAIL_HOST_PASSWORD = ""
+EMAIL_USE_TLS = False
+DEFAULT_FROM_EMAIL = 'testing@example.com'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

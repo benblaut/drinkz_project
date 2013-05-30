@@ -8,6 +8,9 @@ class Ingredient(models.Model):
     def __unicode__(self):
         return self.part + ", " + self.amount
 
+    class Meta:
+        ordering = ['part']
+
 class Recipes(models.Model):
     name = models.CharField(max_length=100)
     ingredients = models.ManyToManyField(Ingredient)

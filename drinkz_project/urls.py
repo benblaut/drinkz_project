@@ -8,9 +8,9 @@ from drinkz_project import settings
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'drinkz_project.views.home', name='home'),
-    # url(r'^drinkz_project/', include('drinkz_project.foo.urls')),
+    url(r'^$', 'drinkz_project.views.home', name='home'),
+
+    url(r'^users/', include('registration.backends.default.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
