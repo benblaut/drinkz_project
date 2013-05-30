@@ -2,15 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Drinkz</title>
+  <title>{% block title %}Drinkz{% endblock %}</title>
   {% load staticfiles %}
   <link type="text/css" rel="stylesheet" href="{% static 'css/base.css' %}" />
   <link type="text/css" rel="stylesheet" href="{% static 'css/themes/default/style.css' %}" />
   <link type="text/css" rel="stylesheet" href="{% static 'css/foldout.css' %}" />
   <script type="text/javascript" charset="utf-8" src="{% static 'scripts/js/jquery-1.6.2.min.js' %}"></script>
   <script type="text/javascript" charset="utf-8" src="{% static 'scripts/js/jquery.raty.js' %}"></script>
-  {% block head %}
-  {% endblock %}
 </head>
 <body>
   <div id="container">
