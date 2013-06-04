@@ -22,6 +22,8 @@ urlpatterns = patterns('',
 
     url(r'^recipes/add_recipe/$', 'recipes.views.add_recipe'),
 
+    url(r'^recipes/add_ingredient/$', 'recipes.views.add_ingredient'),
+
     url(r'rate/(?P<object_id>\d+)/(?P<score>\d+)/', AddRatingFromModel(), {
         'app_label': 'recipes',
         'model': 'recipes',

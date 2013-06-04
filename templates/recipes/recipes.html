@@ -22,6 +22,7 @@
         });
     });
   </script>
+
 {% endblock %}
 
 {% block main %}
@@ -32,20 +33,20 @@
   <tr>
     <td>
         <section class="ac-container">
-        <div>
-          <input id="ac-1" name="accordion-1" type="checkbox" />
-          <label for="ac-1">{{r.name}}</label>
-          <article class="ac-small">
-          <ul>
-          {% for i in r.ingredient_list%}
-            <li>{{i.part}}, {{i.amount}}</li>
-          {% endfor %}
-          </ul>
-          </article>
-        </div>
+          <div>
+            <input id="{{ r.class_name }}" type="checkbox" />
+            <label for="{{ r.class_name }}">{{r.name}}</label>
+            <article class="ac-small">
+            <ul>
+            {% for i in r.ingredient_list%}
+              <li>{{i.part}}, {{i.amount}}</li>
+            {% endfor %}
+            </ul>
+            </article>
+          </div>
         </section>
-    </dl></td>
-    <td><div class="drink_rating" id="t_{{ r.id }}"><span style="display:none;">{{ r.rating.score }}</span></div></td>
+    </td>
+    <td><div class="drink_rating" id="rating_{{ r.class_name }}"><span style="display:none;">{{ r.rating.score }}</span></div></td>
   </tr>
   {% endfor %}
   </table>
@@ -54,7 +55,8 @@
   {% endif %}
 
   <div class="actions-bar wat-cf">
-  <a href="{% url 'admin:recipes_recipes_add' %}">Add a recipe.</a>
+  <!--<a href="{% url 'admin:recipes_recipes_add' %}">Add a recipe.</a>-->
+  <a href="/recipes/add_recipe">Add a recipe.</a>
   </div>
 {% endblock %}
 

@@ -39,6 +39,16 @@ h3 {
   text-decoration: underline;
 }
 
+ul {
+  display: block;
+  list-style-type: disc;
+  -webkit-margin-before: 0px;
+  -webkit-margin-after: 0px;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  -webkit-padding-start: 40px;
+}
+
 a:link, a:visited, a:hover, a:active {
   color: #111111;
   text-decoration: underline;

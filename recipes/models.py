@@ -1,4 +1,5 @@
 from django.db import models
+from django.template.defaultfilters import slugify
 from djangoratings.fields import RatingField
 
 class Ingredient(models.Model):
@@ -22,6 +23,9 @@ class Recipes(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def class_name(self):
+        return "%s"%(slugify(self.name))
 
     class Meta:
         verbose_name = "Recipe"

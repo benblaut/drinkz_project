@@ -42,7 +42,7 @@
 }
 
 .ac-container input{
-    display: inline;
+    display: none;
 }
 .ac-container article{
     background: rgba(255, 255, 255, 0.5);

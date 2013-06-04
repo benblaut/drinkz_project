@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block main %}
+<form action="/recipes/add_ingredient/" method="post">
+{% csrf_token %}
+<table>
+{{ ingredient_add.as_table }}
+</table>
+<b>Note:</b>
+<ul>
+  <li>Enter the part as a generic alcohol (blended whiskey, vodka, coffee liqeur, etc)</li>
+  <li>Amount can be entered in ounces, milliliters, or liters using most accepted abbreviations</li>
+</ul>
+<br>
+<input type="submit" value="Add" />
+</form>
+{% endblock %}
