@@ -12,6 +12,10 @@ urlpatterns = patterns('',
 
     url(r'^users/', include('registration.backends.default.urls')),
 
+    #url(r'^users/login/$', 'users.views.login'),
+
+    #url(r'^users/logout/$', 'users.views.logout'),
+
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 

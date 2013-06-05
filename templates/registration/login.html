@@ -4,13 +4,16 @@
 
 {% block main %}
 
+{% if user.is_authenticated %}
+ <p>You're logged in. Log out.</p>
+{% else %}
 <h1>Log in</h1>
 
 {% if form.errors %}
 <p class="error">Please correct the errors below: {{ form.errors }}</p>
 {% endif %}
 
-<form method="post" action="?next={{ next|default:"/" }}">{% csrf_token %}
+<form method="post" action="?next={{ next|default:'/' }}">{% csrf_token %}
 <dl>
 <dt><label for="id_username">Username:</label>{% if form.username.errors %} <span class="error">{{ form.username.errors|join:", " }}</span>{% endif %}</dt>
 <dd>{{ form.username }}</dd>
@@ -20,9 +23,7 @@
 <br>
 <input type="submit" value="Log in" />
 </form>
-{% endblock %}
-
-{% block content-related %}
 <p>If you don't have an account, you can <a href="/user/register/">sign
 up</a> for one.
+{% endif %}
 {% endblock %}

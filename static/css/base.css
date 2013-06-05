@@ -158,6 +158,15 @@ body {
   padding: 8px 15px;
 }
 
+#user-tools {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1.2em 10px;
+    font-size: 11px;
+    text-align: right;
+}
+
 .secondary-navigation {
   font-size: 13px;  
   border-bottom-width: 10px;

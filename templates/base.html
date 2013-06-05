@@ -22,6 +22,15 @@
           <li><a href="/recipes">Recipes</a></li>
         </ul>
       </div>
+      <div id="user-tools">
+        {% if user.is_authenticated %}
+        Logged in: {{ user.username }} 
+        (<a href="{% url 'auth_logout' %}">Log out</a> | 
+        <a href="{% url 'auth_password_change' %}">Change password</a>)
+        {% else %}
+        <a href="{% url 'auth_login' %}">Log in</a>
+        {% endif %}
+      </div>
     </div>
     <div id="wrapper" class="wat-cf">
       <div id="main">
