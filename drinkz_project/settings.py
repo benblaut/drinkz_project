@@ -139,6 +139,7 @@ EMAIL_HOST_USER = ""
 EMAIL_HOST_PASSWORD = ""
 EMAIL_USE_TLS = False
 DEFAULT_FROM_EMAIL = 'testing@example.com'
+DEFAULT_GROUP_NAME = 'Default'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

@@ -26,16 +26,16 @@
         {% if user.is_active %}
         <div id="user-tools">
             {% trans 'Welcome,' %}
-            <strong>{% filter force_escape %}{% firstof user.get_short_name user.get_username %}{% endfilter %}</strong>.
+            <strong>{% filter force_escape %}{% firstof user.get_short_name user.get_username %}{% endfilter %}</strong>. (
             {% block userlinks %}
-                {% url 'django-admindocs-docroot' as docsroot %}
+                <!--{% url 'django-admindocs-docroot' as docsroot %}
                 {% if docsroot %}
                     <a href="{{ docsroot }}">{% trans 'Documentation' %}</a> /
-                {% endif %}
+                {% endif %}-->
+                <a href="{% url 'admin:logout' %}">{% trans 'Log out' %}</a> /
                 {% if user.has_usable_password %}
-                <a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a> /
+                <a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a> )
                 {% endif %}
-                <a href="{% url 'admin:logout' %}">{% trans 'Log out' %}</a>
             {% endblock %}
         </div>
         {% endif %}
