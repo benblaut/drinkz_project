@@ -26,6 +26,7 @@
 {% endblock %}
 
 {% block main %}
+  {% load mathfilters %}
   <h1>Recipe Collection</h1>
   {% if recipes_list %}
   <table>
@@ -53,6 +54,13 @@
           {% rating_by_user user on r.rating as vote %}
           {{ vote }}
         </span>
+      </div>      
+    </td>
+    <td>
+      <div>
+      <p>
+        <i>Average rating: {{ r.rating.score|div:r.rating.votes }}</i>
+      </p>
       </div>
     </td>
   </tr>

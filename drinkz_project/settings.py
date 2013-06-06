@@ -124,6 +124,7 @@ INSTALLED_APPS = (
     'recipes',
     'djangoratings',
     'registration',
+    'mathfilters',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     'django.contrib.auth',
