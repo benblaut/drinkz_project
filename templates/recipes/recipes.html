@@ -7,7 +7,7 @@
          $('.drink_rating').each(function(index){
           $(this).raty({
             readOnly:  false,
-            path: "/static/images/",
+            path: "/static/img/",
             start: $(this).children("span:first").text(),
             click: function(score, evt) {
                 var vote_url = "rate/" + this.attr('id').substring(2) + "/" + score + "/";
@@ -46,7 +46,7 @@
           </div>
         </section>
     </td>
-    <td><div class="drink_rating" id="rating_{{ r.class_name }}"><span style="display:none;">{{ r.rating.score }}</span></div></td>
+    <td><div class="drink_rating" id="t_{{ r.id }}"><span style="display:none;">{{ r.rating.score }}</span></div></td>
   </tr>
   {% endfor %}
   </table>
@@ -56,8 +56,8 @@
 
   <div class="actions-bar wat-cf">
   <!--<a href="{% url 'admin:recipes_recipes_add' %}">Add a recipe.</a>-->
-  <a href="/recipes/add_recipe">Add a recipe.</a>
-  <a href="/recipes/add_ingredient">Add an ingredient.</a>
+  <a href="/recipes/dashboard/recipes/recipes/add/">Add a recipe.</a>
+  <a href="/recipes/dashboard/recipes/ingredient/add/">Add an ingredient.</a>
   </div>
 {% endblock %}
 
