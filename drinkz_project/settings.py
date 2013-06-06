@@ -115,6 +115,11 @@ TEMPLATE_DIRS = (
     "C:/Users/benb.TRAINMASTER/Documents/GitHub/drinkz_project/drinkz_project/templates"
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.request',
+    'django.contrib.auth.context_processors.auth',
+)
+
 INSTALLED_APPS = (
     'recipes',
     'djangoratings',

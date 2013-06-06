@@ -46,7 +46,15 @@
           </div>
         </section>
     </td>
-    <td><div class="drink_rating" id="t_{{ r.id }}"><span style="display:none;">{{ r.rating.score }}</span></div></td>
+    <td>
+      <div class="drink_rating" id="t_{{ r.id }}">
+        <span style="display:none;">
+          {% load ratings %}
+          {% rating_by_user user on r.rating as vote %}
+          {{ vote }}
+        </span>
+      </div>
+    </td>
   </tr>
   {% endfor %}
   </table>
