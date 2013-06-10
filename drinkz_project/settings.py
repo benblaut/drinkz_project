@@ -1,4 +1,5 @@
 # Django settings for drinkz_project project.
+#import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -138,13 +139,17 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 )
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
 ACCOUNT_ACTIVATION_DAYS = 7 # One week activation window for activating new accounts
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = 1025
-EMAIL_HOST_USER = ""
-EMAIL_HOST_PASSWORD = ""
-EMAIL_USE_TLS = False
-DEFAULT_FROM_EMAIL = 'testing@example.com'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'benblaut@gmail.com'
+#assert 'EMAIL_PW' in os.environ, 'Set EMAIL_PW in your .env file!'
+EMAIL_HOST_PASSWORD = 'whosline07' #os.environ["EMAIL_PW"]
+#DEFAULT_FROM_EMAIL = 'testing@example.com'
+
 DEFAULT_GROUP_NAME = 'Default'
 
 # A sample logging configuration. The only tangible logging
