@@ -123,6 +123,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 INSTALLED_APPS = (
     'recipes',
+    'bottles',
     'djangoratings',
     'registration',
     'mathfilters',

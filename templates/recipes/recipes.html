@@ -37,11 +37,11 @@
         <section class="ac-container">
           <div>
             <input id="{{ r.class_name }}" type="checkbox" />
-            <label for="{{ r.class_name }}">{{r.name}}</label>
+            <label for="{{ r.class_name }}">{{ r.name }}</label>
             <article class="ac-small">
             <ul>
             {% for i in r.ingredient_list%}
-              <li>{{i.part}}, {{i.amount}}</li>
+              <li>{{ i.part }}, {{ i.amount }}</li>
             {% endfor %}
             </ul>
             </article>
@@ -75,8 +75,8 @@
 
   <div class="actions-bar wat-cf">
   <!--<a href="{% url 'admin:recipes_recipes_add' %}">Add a recipe.</a>-->
-  <a href="/recipes/dashboard/recipes/recipes/add/">Add a recipe.</a>
-  <a href="/recipes/dashboard/recipes/ingredient/add/">Add an ingredient.</a>
+  <a href="/dashboard/recipes/recipes/add/">Add a recipe.</a>
+  <a href="/dashboard/recipes/ingredient/add/">Add an ingredient.</a>
   </div>
 {% endblock %}
 

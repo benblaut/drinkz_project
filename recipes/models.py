@@ -43,7 +43,7 @@ class Recipes(models.Model):
         return self.name
 
     def class_name(self):
-        return "%s"%(slugify(self.name))
+        return "%s" % (slugify(self.name))
 
     class Meta:
         verbose_name = "Recipe"
