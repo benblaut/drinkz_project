@@ -7,5 +7,5 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^$', 'bottles.views.bottles'),
 
-    
+    url(r'^sort_by_mfg', 'bottles.views.bottles_by_mfg'),
 )

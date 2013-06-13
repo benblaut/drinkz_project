@@ -3,20 +3,20 @@
 {% block main %}
   <h1>Bottle Collection</h1>
   {% if bottles_list %}
-  <a href="/bottles/sort_by_mfg/">Sort by manufacturer.</a>
+  <a href="/bottles/">Sort by type.</a>
   <table>
-  {% for t in type_list %}
+  {% for m in mfg_list %}
   <tr>
     <td>
         <section class="ac-container">
           <div>
-            <input id="{{ t }}_box" type="checkbox" />
-            <label for="{{ t }}_box">{{ t }}</label>
+            <input id="{{ m }}_box" type="checkbox" />
+            <label for="{{ m }}_box">{{ m }}</label>
             <article class="ac-small">
             <ul>
             {% for b in bottles_list %}
-              {% if b.typ == t %}
-                <li>{{ b.mfg }} {{ b.liquor }}</li>
+              {% if b.mfg == m %}
+                <li>{{ b.liquor }} ({{ b.typ }})</li>
               {% endif %}
             {% endfor %}
             </ul>
@@ -32,6 +32,7 @@
   {% endif %}
 
   <div class="actions-bar wat-cf">
+  <!--<a href="{% url 'admin:recipes_recipes_add' %}">Add a recipe.</a>-->
   <a href="/dashboard/bottles/bottle/add/">Add a bottle.</a>
   </div>
 {% endblock %}
