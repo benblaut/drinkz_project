@@ -26,9 +26,17 @@ class BottleForm(forms.ModelForm):
         items = Ingredient.objects.values_list('part', flat=True).distinct()
         self.fields['typ'].choices = [(item, item) for item in items]
 
+    class Meta:
+        model = Bottle
+        exclude = ['user']
+
 class BottleAdmin(admin.ModelAdmin):
     model = Bottle
     form = BottleForm
+
+    def save_model(self, request, obj, form, change):
+        obj.user = request.user
+        obj.save()
 
 user_admin_site = UserAdmin(name='usersadmin')
 

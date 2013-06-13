@@ -52,7 +52,7 @@
       <div class="drink_rating" id="t_{{ r.id }}">
         <span style="display:none;">
           {% load ratings %}
-          {% if r.rating %}
+          {% if user.is_authenticated %}
           {% rating_by_user user on r.rating as vote %}
           {{ vote }}
           {% endif %}
