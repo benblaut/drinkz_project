@@ -73,6 +73,21 @@
   <p>There doesn't seem to be any recipes.</p>
   {% endif %}
 
+  {% if ingredients_needed %}
+  {% for i in ingredients_needed %}
+    <p>{{ i }}</p>
+  {% endfor %}
+  {% endif %}
+
+  <!--{% if recipes_list %}
+  {% for r in recipes_list %}
+    {% for s in r.need_ingredients %}
+      <p>{{ s }}</p>
+    {% endfor %}
+  {% endfor %}
+  {% endif %}-->
+
+
   <div class="actions-bar wat-cf">
   <!--<a href="{% url 'admin:recipes_recipes_add' %}">Add a recipe.</a>-->
   <a href="/dashboard/recipes/recipes/add/">Add a recipe.</a>
