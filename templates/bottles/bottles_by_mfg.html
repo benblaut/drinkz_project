@@ -16,7 +16,7 @@
             <ul>
             {% for b in bottles_list %}
               {% if b.mfg == m %}
-                <li>{{ b.liquor }} ({{ b.typ }})</li>
+                <li>{{ b.liquor }} ({{ b.typ }}) - {{ b.amount }}</li>
               {% endif %}
             {% endfor %}
             </ul>

@@ -11,12 +11,16 @@
         <section class="ac-container">
           <div>
             <input id="{{ t }}_box" type="checkbox" />
-            <label for="{{ t }}_box">{{ t }}</label>
+            {% for typ, amt in type_amounts.items %}
+              {% if t == typ %}
+                <label for="{{ t }}_box">{{ t }} ({{ amt }})</label>
+              {% endif %}
+            {% endfor %}
             <article class="ac-small">
             <ul>
             {% for b in bottles_list %}
               {% if b.typ == t %}
-                <li>{{ b.mfg }} {{ b.liquor }}</li>
+                <li>{{ b.mfg }} {{ b.liquor }} - {{ b.amount }}</li>
               {% endif %}
             {% endfor %}
             </ul>
