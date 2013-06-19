@@ -8,6 +8,8 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^$', 'recipes.views.recipes'),
 
+    url(r'^sort_by_rating', 'recipes.views.recipes_by_rating'),
+
     url(r'rate/(?P<object_id>\d+)/(?P<score>\d+)/', AddRatingFromModel(), {
         'app_label': 'recipes',
         'model': 'recipes',

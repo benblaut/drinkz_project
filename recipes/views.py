@@ -2,8 +2,10 @@ from django.shortcuts import render_to_response, redirect, get_object_or_404
 from recipes.models import Recipes, Ingredient
 from bottles.models import Bottle
 from django.template import RequestContext
+from django.contrib.auth.decorators import login_required
 import unicodedata
 
+@login_required
 def recipes(request):
     recipes_list = Recipes.objects.all()
     inventory = Bottle.objects.filter(user=request.user)
@@ -19,7 +21,7 @@ def recipes(request):
             typ = i.part
             brands_owned = check_inventory_for_type(inventory, typ, brands_owned)
             if len(brands_owned) == 0:
-                types_needed.append((typ, amt))
+                types_needed.append((unicodedata.normalize('NFKD', rec.name).encode('ascii', 'ignore'), typ, amt))
             else:
                 amounts_from_brands = []
 
@@ -28,13 +30,50 @@ def recipes(request):
                     amounts_from_brands.append(amount_owned_of_brand)
                 if (amount_owned_of_brand <= amt):
                     amount_needed = amt - amount_owned_of_brand
-                    ingredients_needed.append((unicodedata.normalize('NFKD', typ).encode('ascii', 'ignore'), amount_needed))
+                    ingredients_needed.append((unicodedata.normalize('NFKD', rec.name).encode('ascii', 'ignore'), unicodedata.normalize('NFKD', typ).encode('ascii', 'ignore'), amount_needed))
 
-    for (type_needed, amount_needed) in types_needed:
-        ingredients_needed.append((unicodedata.normalize('NFKD', type_needed).encode('ascii', 'ignore'), amount_needed))    
+    for (rec_name, type_needed, amount_needed) in types_needed:
+        ingredients_needed.append((rec_name, unicodedata.normalize('NFKD', type_needed).encode('ascii', 'ignore'), amount_needed))    
 
     return render_to_response('recipes/recipes.html', {'recipes_list': recipes_list, 'ingredients_needed': ingredients_needed,}, 
                               context_instance=RequestContext(request))    
+
+@login_required
+def recipes_by_rating(request):
+    recipes_list_by_rating = Recipes.objects.all()
+    recipes_list_by_rating = recipes_list_by_rating.extra(select={
+      'rating_int': '((100/%s*rating_score/(rating_votes+%s))+100)/2' % (Recipes.rating.range, Recipes.rating.weight)
+    })
+    recipes_list_by_rating = recipes_list_by_rating.order_by('-rating_int')
+    inventory = Bottle.objects.filter(user=request.user)
+
+    types_needed = []
+    ingredients_needed = []
+
+    for rec in recipes_list_by_rating:
+        ings = rec.ingredients.all()
+        for i in ings:
+            brands_owned = []
+            amt = convert_to_ml(i.amount)
+            typ = i.part
+            brands_owned = check_inventory_for_type(inventory, typ, brands_owned)
+            if len(brands_owned) == 0:
+                types_needed.append((unicodedata.normalize('NFKD', rec.name).encode('ascii', 'ignore'), typ, amt))
+            else:
+                amounts_from_brands = []
+
+                for (m, l) in brands_owned:
+                    amount_owned_of_brand = get_liquor_amount(inventory, m, l)
+                    amounts_from_brands.append(amount_owned_of_brand)
+                if (amount_owned_of_brand <= amt):
+                    amount_needed = amt - amount_owned_of_brand
+                    ingredients_needed.append((unicodedata.normalize('NFKD', rec.name).encode('ascii', 'ignore'), unicodedata.normalize('NFKD', typ).encode('ascii', 'ignore'), amount_needed))
+
+    for (rec_name, type_needed, amount_needed) in types_needed:
+        ingredients_needed.append((rec_name, unicodedata.normalize('NFKD', type_needed).encode('ascii', 'ignore'), amount_needed))    
+
+    return render_to_response('recipes/recipes_by_rating.html', {'recipes_list_by_rating': recipes_list_by_rating, 'ingredients_needed': ingredients_needed,}, 
+                              context_instance=RequestContext(request))
 
 def convert_to_ml(amount):
     "Take a string of form (# unit), convert the # to ml and change unit to ml"

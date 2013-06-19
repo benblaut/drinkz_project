@@ -29,10 +29,10 @@
 {% block main %}
   {% load mathfilters %}
   <h1>Recipe Collection</h1>
-  {% if recipes_list %}
-  <a href="/recipes/sort_by_rating/">Sort by average rating.</a>
+  {% if recipes_list_by_rating %}
+  <a href="/recipes">Sort by recipe name.</a>
   <table>
-  {% for r in recipes_list %}
+  {% for r in recipes_list_by_rating %}
   <tr>
     <td>
         <section class="ac-container">

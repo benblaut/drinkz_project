@@ -51,11 +51,11 @@
     height: 0px;
     position: relative;
     z-index: 10;
-    -webkit-transition: height 0.3s ease-in-out, box-shadow 0.6s linear;
-    -moz-transition: height 0.3s ease-in-out, box-shadow 0.6s linear;
-    -o-transition: height 0.3s ease-in-out, box-shadow 0.6s linear;
-    -ms-transition: height 0.3s ease-in-out, box-shadow 0.6s linear;
-    transition: height 0.3s ease-in-out, box-shadow 0.6s linear;
+    -webkit-transition: max-height 0.6s ease-in-out, box-shadow 1.2s linear;
+    -moz-transition: max-height 0.6s ease-in-out, box-shadow 1.2s linear;
+    -o-transition: max-height 0.6s ease-in-out, box-shadow 1.2s linear;
+    -ms-transition: max-height 0.6s ease-in-out, box-shadow 1.2s linear;
+    transition: max-height 0.6s ease-in-out, box-shadow 1.2s linear;
 }
 .ac-container article li{
     font-style: italic;
@@ -66,15 +66,16 @@
     text-shadow: 1px 1px 1px rgba(255,255,255,0.8);
 }
 .ac-container input:checked ~ article{
-    -webkit-transition: height 0.5s ease-in-out, box-shadow 0.1s linear;
-    -moz-transition: height 0.5s ease-in-out, box-shadow 0.1s linear;
-    -o-transition: height 0.5s ease-in-out, box-shadow 0.1s linear;
-    -ms-transition: height 0.5s ease-in-out, box-shadow 0.1s linear;
-    transition: height 0.5s ease-in-out, box-shadow 0.1s linear;
+    -webkit-transition: max-height 1.0s ease-in-out, box-shadow 0.2s linear;
+    -moz-transition: max-height 1.0s ease-in-out, box-shadow 0.2s linear;
+    -o-transition: max-height 1.0s ease-in-out, box-shadow 0.2s linear;
+    -ms-transition: max-height 1.0s ease-in-out, box-shadow 0.2s linear;
+    transition: max-height 1.0s ease-in-out, box-shadow 0.2s linear;
     box-shadow: 0px 0px 0px 1px rgba(155,155,155,0.3);
 }
 .ac-container input:checked ~ article.ac-small{
-    height: 140px;
+    height: auto;
+    max-height: 1000px;
 }
 .ac-container input:checked ~ article.ac-medium{
     height: 180px;

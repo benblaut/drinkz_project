@@ -11,3 +11,6 @@ class Bottle(models.Model):
 
     def __unicode__(self):
         return self.mfg + ", " + self.liquor + ", " + self.typ + ", " + self.amount
+
+    class Meta:
+        ordering = ['typ']
