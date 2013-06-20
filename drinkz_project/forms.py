@@ -2,6 +2,11 @@ from django.contrib.auth.forms import AuthenticationForm
 from django import forms
 from django.utils.translation import ugettext_lazy
 from django.contrib.auth import authenticate
+from bottles.models import Bottle
+from recipes.models import Recipes, Ingredient
+from parties.models import Party
+from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
+from django.db.models import ManyToOneRel
 
 class UserAdminAuthenticationForm(AuthenticationForm):
     """
@@ -42,3 +47,26 @@ class UserAdminAuthenticationForm(AuthenticationForm):
                 raise forms.ValidationError(message)
         self.check_for_test_cookie()
         return self.cleaned_data
+
+class BottleForm(forms.ModelForm): 
+    typ = forms.ChoiceField(widget = forms.Select(), choices = [])
+   
+    def __init__(self, *args, **kwargs):
+        super(BottleForm, self).__init__(*args, **kwargs)
+        items = Ingredient.objects.values_list('part', flat=True).distinct()
+        self.fields['typ'].choices = [(item, item) for item in items]
+
+    class Meta:
+        model = Bottle
+        exclude = ['user']
+
+class PartyForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(PartyForm, self).__init__(*args, **kwargs)
+        self.fields['pledge_list'] = forms.ModelMultipleChoiceField(queryset=Bottle.objects.filter(user=self.current_user))
+        rel = ManyToOneRel(Bottle, 'id')
+        self.fields['pledge_list'].widget = RelatedFieldWidgetWrapper(self.fields['pledge_list'].widget, rel, self.user_admin_site)
+
+    class Meta:
+        model = Party
+        exclude = ['host_user']

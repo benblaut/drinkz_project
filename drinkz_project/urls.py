@@ -19,4 +19,6 @@ urlpatterns = patterns('',
     url(r'^recipes/', include('recipes.urls')),
 
     url(r'^bottles/', include('bottles.urls')),
+
+    url(r'^parties/', include('parties.urls')),
 )

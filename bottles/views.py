@@ -1,7 +1,5 @@
 from django.shortcuts import render_to_response, redirect
 from bottles.models import Bottle
-from bottles.admin import BottleForm
-from recipes.models import Ingredient
 from recipes.views import convert_to_ml
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required

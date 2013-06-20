@@ -124,9 +124,11 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 INSTALLED_APPS = (
     'recipes',
     'bottles',
+    'parties',
     'djangoratings',
     'registration',
     'mathfilters',
+    'south',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     'django.contrib.auth',

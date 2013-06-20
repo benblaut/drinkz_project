@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block main %}
+  <h1>My Parties</h1>
+  {% if party_list %}
+  <table>
+  {% for p in party_list %}
+  <tr>
+    <td>
+        <section class="ac-container">
+          <div>
+            <input id="{{ p.name }}_box" type="checkbox" />
+            <label for="{{ p.name }}_box">{{ p.name }}</label>
+            <article class="ac-small">
+              <p>Host: {{ p.host }}</p>
+              <p>{{ p.date }}</p>
+              <p>{{ p.location }}</p>
+              <p><u><font size="3">Guests</font></u></p>
+              {% if p.guests.all %}
+                {% for g in p.guests.all %}
+                  <p>--{{ g }}</p>
+                {% endfor %}
+              {% else %}
+                <p>Nobody...</p>
+              {% endif %}
+              <p><u><font size="3">Pledge List</font></u></p>
+              {% if p.pledge_list.all %}
+                {% for bottle in p.pledge_list.all %}
+                  <p>-- {{ bottle }}</p>
+                {% endfor %}
+              {% else %}
+                <p>Nobody has pledged anything...</p>
+              {% endif %}
+              <p>++<a href="/dashboard/parties/party/{{ p.id }}">Bring something!</a></p>
+            </article>
+          </div>
+        </section>
+    </td>
+  </tr>
+  {% endfor %}
+  </table>
+  {% else %}
+  <p>You have neither created nor been invited to any parties!</p>
+  {% endif %}
+
+  <div class="actions-bar wat-cf">
+  <a href="/dashboard/parties/party/add/">Create a party!</a>
+  </div>
+{% endblock %}
+
+{% block sidebar %}
+  <div class="block">
+    <div class="sidebar-block">
+      <h4>Party List</h4>
+      <p>A list of all your parties.</p>
+    </div>
+  </div>
+{% endblock %}
