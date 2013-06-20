@@ -41,8 +41,11 @@ class PartyAdmin(admin.ModelAdmin):
         return form
 
     def save_model(self, request, obj, form, change):
-        obj.host_user = request.user
-        obj.save()
+        if change:
+            pass
+        else:
+            obj.host_user = request.user
+            obj.save()
 
 user_admin_site = UserAdmin(name='usersadmin')
 
