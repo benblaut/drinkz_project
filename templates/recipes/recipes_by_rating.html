@@ -90,8 +90,24 @@
 {% block sidebar %}
   <div class="block">
     <div class="sidebar-block">
-      <h4>Recipe List</h4>
-      <p>Recipes with ratings.</p>
+      <h4>Mixable Recipes</h4>
+      {% if mixable_recs %}
+      <p><font size="2">You have the ingredients to make the following recipes:</font></p>
+        {% for rec in mixable_recs %}
+          <p>-- <label for="{{ rec.class_name }}">{{ rec.name }}</label></p>
+        {% endfor %}
+      {% else %}
+        <p>You can't make any recipes. Time to stock up!</p>
+      {% endif %}
+      <h4>Almost Mixable Recipes</h4>
+      {% if partial_recs %}
+        <p><font size="2">You have one ingredient or part of an ingredient for the following recipes:</font></p>
+        {% for recipe in partial_recs %}
+          <p>-- <label for="{{ recipe.class_name }}">{{ recipe.name }}</label></p>
+        {% endfor %}
+      {% else %}
+        <p>You don't have any partial ingredients for a recipe!</p>
+      {% endif %}
     </div>
   </div>
 {% endblock %}

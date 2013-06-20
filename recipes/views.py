@@ -12,8 +12,12 @@ def recipes(request):
 
     types_needed = []
     ingredients_needed = []
+    mixable_recs = []
+    partial_recs = []
 
     for rec in recipes_list:
+        needs_ingredients = False
+        has_some_ingredients = False
         ings = rec.ingredients.all()
         for i in ings:
             brands_owned = []
@@ -21,6 +25,7 @@ def recipes(request):
             typ = i.part
             brands_owned = check_inventory_for_type(inventory, typ, brands_owned)
             if len(brands_owned) == 0:
+                needs_ingredients = True
                 types_needed.append((unicodedata.normalize('NFKD', rec.name).encode('ascii', 'ignore'), typ, amt))
             else:
                 amounts_from_brands = []
@@ -29,13 +34,22 @@ def recipes(request):
                     amount_owned_of_brand = get_liquor_amount(inventory, m, l)
                     amounts_from_brands.append(amount_owned_of_brand)
                 if (amount_owned_of_brand <= amt):
+                    needs_ingredients = True
+                    has_some_ingredients = True
                     amount_needed = amt - amount_owned_of_brand
                     ingredients_needed.append((unicodedata.normalize('NFKD', rec.name).encode('ascii', 'ignore'), unicodedata.normalize('NFKD', typ).encode('ascii', 'ignore'), amount_needed))
 
-    for (rec_name, type_needed, amount_needed) in types_needed:
-        ingredients_needed.append((rec_name, unicodedata.normalize('NFKD', type_needed).encode('ascii', 'ignore'), amount_needed))    
+        if not needs_ingredients:
+            mixable_recs.append(rec)
 
-    return render_to_response('recipes/recipes.html', {'recipes_list': recipes_list, 'ingredients_needed': ingredients_needed,}, 
+        if has_some_ingredients:
+           partial_recs.append(rec)
+
+    for (rec_name, type_needed, amount_needed) in types_needed:
+        ingredients_needed.append((rec_name, unicodedata.normalize('NFKD', type_needed).encode('ascii', 'ignore'), amount_needed))   
+
+    print partial_recs
+    return render_to_response('recipes/recipes.html', {'recipes_list': recipes_list, 'ingredients_needed': ingredients_needed, 'mixable_recs': mixable_recs, 'partial_recs': partial_recs,}, 
                               context_instance=RequestContext(request))    
 
 @login_required
@@ -49,8 +63,12 @@ def recipes_by_rating(request):
 
     types_needed = []
     ingredients_needed = []
+    mixable_recs = []
+    partial_recs = []
 
     for rec in recipes_list_by_rating:
+        needs_ingredients = False
+        has_some_ingredients = False
         ings = rec.ingredients.all()
         for i in ings:
             brands_owned = []
@@ -58,6 +76,7 @@ def recipes_by_rating(request):
             typ = i.part
             brands_owned = check_inventory_for_type(inventory, typ, brands_owned)
             if len(brands_owned) == 0:
+                needs_ingredients = True
                 types_needed.append((unicodedata.normalize('NFKD', rec.name).encode('ascii', 'ignore'), typ, amt))
             else:
                 amounts_from_brands = []
@@ -66,13 +85,21 @@ def recipes_by_rating(request):
                     amount_owned_of_brand = get_liquor_amount(inventory, m, l)
                     amounts_from_brands.append(amount_owned_of_brand)
                 if (amount_owned_of_brand <= amt):
+                    needs_ingredients = True
+                    has_some_ingredients = True
                     amount_needed = amt - amount_owned_of_brand
                     ingredients_needed.append((unicodedata.normalize('NFKD', rec.name).encode('ascii', 'ignore'), unicodedata.normalize('NFKD', typ).encode('ascii', 'ignore'), amount_needed))
+
+        if not needs_ingredients:
+           mixable_recs.append(rec)
+
+        if has_some_ingredients:
+           partial_recs.append(rec)
 
     for (rec_name, type_needed, amount_needed) in types_needed:
         ingredients_needed.append((rec_name, unicodedata.normalize('NFKD', type_needed).encode('ascii', 'ignore'), amount_needed))    
 
-    return render_to_response('recipes/recipes_by_rating.html', {'recipes_list_by_rating': recipes_list_by_rating, 'ingredients_needed': ingredients_needed,}, 
+    return render_to_response('recipes/recipes_by_rating.html', {'recipes_list_by_rating': recipes_list_by_rating, 'ingredients_needed': ingredients_needed, 'mixable_recs': mixable_recs, 'partial_recs': partial_recs,}, 
                               context_instance=RequestContext(request))
 
 def convert_to_ml(amount):

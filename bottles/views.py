@@ -15,10 +15,11 @@ def bottles(request):
     for bottle in bottle_list:
         if bottle.typ not in type_list:
             type_list.append(bottle.typ)
-
-    for t in type_list:
-        type_amount = get_liquor_amount_by_type(bottle_list, t)
-        type_amounts[t] = type_amount
+            type_amounts[bottle.typ] = convert_to_ml(bottle.amount)
+        else:
+            current_amount = type_amounts[bottle.typ]
+            current_amount += convert_to_ml(bottle.amount)
+            type_amounts[bottle.typ] = current_amount
 
     return render_to_response('bottles/bottles.html', {'bottles_list': bottle_list, 'type_list': type_list, 'type_amounts': type_amounts,}, 
                               context_instance=RequestContext(request))
@@ -33,14 +34,3 @@ def bottles_by_mfg(request):
 
     return render_to_response('bottles/bottles_by_mfg.html', {'bottles_list': bottle_list, 'mfg_list': mfg_list,}, 
                               context_instance=RequestContext(request))
-
-def get_liquor_amount_by_type(bottle_list, typ):
-    amounts = []
-    for bottle in bottle_list:
-        if bottle.typ == typ:
-            ml_amount = convert_to_ml(bottle.amount)
-            amounts.append(ml_amount)
-            total = sum(amounts)
-            print len(bottle_list)
-
-            return str(total) + " ml"

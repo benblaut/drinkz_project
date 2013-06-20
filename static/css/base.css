@@ -24,6 +24,10 @@ hr { height: 1px; border: 0; }
 p { margin: 15px 0; }
 a img { border: none; }
 
+label {
+  cursor: pointer;
+}
+
 body {
   font-size: 12px;
   font-family: sans-serif;  

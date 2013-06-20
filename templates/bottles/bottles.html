@@ -13,7 +13,7 @@
             <input id="{{ t }}_box" type="checkbox" />
             {% for typ, amt in type_amounts.items %}
               {% if t == typ %}
-                <label for="{{ t }}_box">{{ t }} ({{ amt }})</label>
+                <label for="{{ t }}_box">{{ t }} ({{ amt }} ml)</label>
               {% endif %}
             {% endfor %}
             <article class="ac-small">
