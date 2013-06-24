@@ -31,7 +31,11 @@
               {% else %}
                 <p>Nobody has pledged anything...</p>
               {% endif %}
-              <p>++<a href="/dashboard/parties/party/{{ p.id }}">Bring something!</a></p>
+              <p>
+                <a href="/dashboard/parties/party/{{ p.id }}">
+                  <button>Bring something!</button>
+                </a>
+              </p>
             </article>
           </div>
         </section>
@@ -44,7 +48,7 @@
   {% endif %}
 
   <div class="actions-bar wat-cf">
-  <a href="/dashboard/parties/party/add/">Create a party!</a>
+  <a href="/dashboard/parties/party/add/"><button>Create a party!</button></a>
   </div>
 {% endblock %}
 

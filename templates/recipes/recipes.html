@@ -30,7 +30,8 @@
   {% load mathfilters %}
   <h1>Recipe Collection</h1>
   {% if recipes_list %}
-  <a href="/recipes/sort_by_rating/">Sort by average rating.</a>
+  <a href="/recipes/sort_by_rating/"><button>Sort by average rating.</button></a>
+  <br><br>
   <table>
   {% for r in recipes_list %}
   <tr>
@@ -82,8 +83,8 @@
   {% endif %}
 
   <div class="actions-bar wat-cf">
-  <a href="/dashboard/recipes/recipes/add/">Add a recipe.</a>
-  <a href="/dashboard/recipes/ingredient/add/">Add an ingredient.</a>
+  <a href="/dashboard/recipes/recipes/add/"><button>Add a recipe.</button></a>
+  <a href="/dashboard/recipes/ingredient/add/"><button>Add an ingredient.</button></a>
   </div>
 {% endblock %}
 

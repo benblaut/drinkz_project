@@ -2,8 +2,9 @@
 
 {% block main %}
   <h1>Bottle Collection</h1>
-  {% if bottles_list %}
-  <a href="/bottles/sort_by_mfg/">Sort by manufacturer.</a>
+  {% if bottles_list and type_list and type_amounts %}
+  <a href="/bottles/sort_by_mfg/"><button>Sort by manufacturer.</button></a>
+  <br><br>
   <table>
   {% for t in type_list %}
   <tr>
@@ -36,7 +37,7 @@
   {% endif %}
 
   <div class="actions-bar wat-cf">
-  <a href="/dashboard/bottles/bottle/add/">Add a bottle.</a>
+  <a href="/dashboard/bottles/bottle/add/"><button>Add a bottle.</button></a>
   </div>
 {% endblock %}
 
@@ -44,7 +45,12 @@
   <div class="block">
     <div class="sidebar-block">
       <h4>Bottle List</h4>
-      <p>A list of types of alcohol in your inventory.</p>
+      {% if bottles_list and type_list and type_amounts and highest %}
+        <p>You have {{ bottles_list|length }} bottles in your inventory.</p>
+        <p>You have {{ type_list|length }} different types of alcohol in your inventory.</p>
+        <p>You have {{ mfg_list|length }} different brands of alcohol in your inventory.</p>
+        <p>The {{ highest.0 }} is not gone (you have {{ highest.1 }} ml of it).</p>
+      {% endif %}
     </div>
   </div>
 {% endblock %}
