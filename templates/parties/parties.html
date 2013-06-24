@@ -12,9 +12,13 @@
             <input id="{{ p.name }}_box" type="checkbox" />
             <label for="{{ p.name }}_box">{{ p.name }}</label>
             <article class="ac-small">
-              <p>Host: {{ p.host }}</p>
-              <p>{{ p.date }}</p>
-              <p>{{ p.location }}</p>
+              <p><b>Host:</b> {{ p.host }}</p>
+              <p><b>Date:</b> {{ p.date }}</p>
+              <p><b>Location:</b> {{ p.location }}</p>
+              {% load easy_maps_tags %}
+              {% with location=p.location %}
+              {% easy_map location 300 200 13 using 'parties/map.html' %}
+              {% endwith %}
               <p><u><font size="3">Guests</font></u></p>
               {% if p.guests.all %}
                 {% for g in p.guests.all %}
@@ -23,13 +27,13 @@
               {% else %}
                 <p>Nobody...</p>
               {% endif %}
-              <p><u><font size="3">Pledge List</font></u></p>
-              {% if p.pledge_list.all %}
-                {% for bottle in p.pledge_list.all %}
+              <p><u><font size="3">Current Bar</font></u></p>
+              {% if p.bar_list.all %}
+                {% for bottle in p.bar_list.all %}
                   <p>-- {{ bottle }}</p>
                 {% endfor %}
               {% else %}
-                <p>Nobody has pledged anything...</p>
+                <p>There's no alcohol at this party yet...</p>
               {% endif %}
               <p>
                 <a href="/dashboard/parties/party/{{ p.id }}">

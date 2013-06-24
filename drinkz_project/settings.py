@@ -128,6 +128,7 @@ INSTALLED_APPS = (
     'djangoratings',
     'registration',
     'mathfilters',
+    'easy_maps',
     'south',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',

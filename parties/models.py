@@ -9,7 +9,7 @@ class Party(models.Model):
     date = models.DateTimeField()
     location = models.CharField(max_length=100)
     guests = models.ManyToManyField(User, related_name='guests')
-    pledge_list = models.ManyToManyField(Bottle)
+    bar_list = models.ManyToManyField(Bottle, blank=True, null=True)
 
     def __unicode__(self):
         return self.name
