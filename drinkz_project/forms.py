@@ -63,9 +63,9 @@ class BottleForm(forms.ModelForm):
 class PartyForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(PartyForm, self).__init__(*args, **kwargs)
-        self.fields['pledge_list'] = forms.ModelMultipleChoiceField(queryset=Bottle.objects.filter(user=self.current_user))
+        self.fields['bar_list'] = forms.ModelMultipleChoiceField(queryset=Bottle.objects.filter(user=self.current_user))
         rel = ManyToOneRel(Bottle, 'id')
-        self.fields['pledge_list'].widget = RelatedFieldWidgetWrapper(self.fields['pledge_list'].widget, rel, self.user_admin_site)
+        self.fields['bar_list'].widget = RelatedFieldWidgetWrapper(self.fields['bar_list'].widget, rel, self.user_admin_site)
 
     class Meta:
         model = Party
