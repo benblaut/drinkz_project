@@ -48,7 +48,7 @@ def recipes(request):
     for (rec_name, type_needed, amount_needed) in types_needed:
         ingredients_needed.append((rec_name, unicodedata.normalize('NFKD', type_needed).encode('ascii', 'ignore'), amount_needed))   
 
-    print partial_recs
+    print (partial_recs)
     return render_to_response('recipes/recipes.html', {'recipes_list': recipes_list, 'ingredients_needed': ingredients_needed, 'mixable_recs': mixable_recs, 'partial_recs': partial_recs,}, 
                               context_instance=RequestContext(request))    
 
@@ -119,7 +119,7 @@ def convert_to_ml(amount):
         float_amount *= 3785.41
         return float_amount
     else:
-        print "\nIncorrect unit of measurement, use ml, g, or oz."
+        print ("\nIncorrect unit of measurement, use ml, g, or oz.")
 
 def check_inventory_for_type(inventory, typ, brands_owned):
     for b in inventory:
