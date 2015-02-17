@@ -10,17 +10,29 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'C:/Users/Ben/Documents/GitHub/drinkz_project/db.db',                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
+if 'RDS_DB_NAME' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+            'NAME': os.environ['RDS_DB_NAME'],                      # Or path to database file if using sqlite3.
+            # The following settings are not used with sqlite3:
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+            'PORT': os.environ['RDS_PORT'],                      # Set to empty string for default.
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'drinkz_project',
+            'USER': 'drinkz_project',
+            'PASSWORD': 'drinkz_project',
+            'HOST': 'localhost',
+            'PORT': '8000',
+        }
+    }
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -62,7 +74,7 @@ MEDIA_URL = '/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = '/files/static'
+STATIC_ROOT = os.path.join(BASE_DIR, "..", "www", "static")#'/files/static'
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"

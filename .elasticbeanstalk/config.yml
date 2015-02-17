@@ -1,0 +1,10 @@
+branch-defaults:
+  master:
+    environment: drinkz-project-dev
+global:
+  application_name: drinkz_project
+  default_ec2_keyname: drinkz_project
+  default_platform: Python 2.7
+  default_region: us-east-1
+  profile: eb-cli
+  sc: git
